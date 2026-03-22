@@ -2,7 +2,7 @@
 
 A Python/Flask microservices application for secure healthcare data management with OIDC authentication, encryption at rest, audit logging, and comprehensive monitoring.
 
-## ✅ Completed Tasks
+##  Completed Tasks
 
 - [x] **TASK 1**: Fixed `server.py` to run HTTPS on port 8443 with self-signed certificates
   - Added GET `/records` endpoint to list all encrypted patient records
@@ -62,7 +62,7 @@ A Python/Flask microservices application for secure healthcare data management w
   - App correctly reads from environment variable
   - Data and audit.log volumes mount for persistence
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### Prerequisites
 
@@ -171,7 +171,7 @@ curl -k -X GET https://localhost:8443/records/patient1 \
 - **[TLS_VERIFICATION.md](TLS_VERIFICATION.md)** - TLS/HTTPS verification
 - **[DOCKER_SECRETS_CONFIG.md](DOCKER_SECRETS_CONFIG.md)** - Docker secrets setup
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 ┌─────────────────┐
@@ -211,7 +211,7 @@ Monitoring Stack (Optional):
 Jenkins :8081          (CI/CD)
 ```
 
-## 🔐 Security Features
+##  Security Features
 
 1. **Authentication**: OAuth2/OIDC via Keycloak
    - JWT token verification
@@ -242,7 +242,7 @@ Jenkins :8081          (CI/CD)
    - Strips sensitive fields (SSN, etc.)
    - Returns only: id, name, dob, consent
 
-## 📊 Monitoring
+##  Monitoring
 
 ### Prometheus Metrics
 
@@ -273,7 +273,7 @@ tail -20 audit.log
 cat audit.log | jq '.action' | sort | uniq -c
 ```
 
-## 🧪 Testing
+##  Testing
 
 ### Run Unit Tests Locally
 
@@ -312,7 +312,7 @@ curl -s http://localhost:8080/realms/health/protocol/openid-connect/token \
   | jq -R 'split(".") | .[1] | @base64d | fromjson'
 ```
 
-## 🔄 Key Rotation
+##  Key Rotation
 
 Rotate encryption keys without data loss:
 
@@ -327,7 +327,7 @@ This script:
 4. Backs up old key
 5. Updates `keys/data.key`
 
-## 📦 API Endpoints
+##  API Endpoints
 
 | Method | Endpoint | Role Required | Returns | Purpose |
 |--------|----------|---------------|---------|---------|
@@ -355,7 +355,7 @@ In `app/server.py`:
 - SSL context: Uses certs/server.crt and certs/server.key
 - Debug mode: Disabled in production
 
-## 🐛 Troubleshooting
+##  Troubleshooting
 
 ### API won't start
 
@@ -410,7 +410,7 @@ docker compose exec app ls -la /app/data/
 docker compose exec app ls -la /run/secrets/
 ```
 
-## 📝 Implementation Details
+##  Implementation Details
 
 ### Storage (AES Encryption)
 
