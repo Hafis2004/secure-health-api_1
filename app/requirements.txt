@@ -1,0 +1,7 @@
+flask
+pyjwt
+requests
+cryptography
+prometheus_client
+pytest
+pytest-cov

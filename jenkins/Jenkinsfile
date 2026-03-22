@@ -1,0 +1,35 @@
+pipeline {
+  agent any
+  stages {
+    stage('Checkout') {
+      steps { 
+        checkout scm 
+      }
+    }
+    stage('Build') {
+      steps {
+        sh 'docker build -t health-api:local ./app'
+      }
+    }
+    stage('Test') {
+      steps {
+        sh 'docker run --rm -v $WORKSPACE:/workspace health-api:local sh -c "cd /app && python -m pytest tests/ -v --junitxml=/workspace/pytest.xml"'
+      }
+      post {
+        always { 
+          junit 'pytest.xml'
+        }
+      }
+    }
+    stage('Security basics') {
+      steps {
+        sh 'docker run --rm health-api:local sh -c "pip install pip-audit && pip-audit -r requirements.txt"'
+      }
+    }
+    stage('Deploy') {
+      steps {
+        sh 'docker compose up -d'
+      }
+    }
+  }
+}
